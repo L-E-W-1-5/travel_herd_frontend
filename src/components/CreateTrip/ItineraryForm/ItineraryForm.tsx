@@ -17,12 +17,9 @@ export default function ItineraryForm({ control, register, nestIndex}:any) {
           return (
             <div key={item.id} id="itinerary-page" className="form-page">
 
-
-              <select id="itinerary-page-item" className="form-page-input-field" 
-                         
+              <select id="itinerary-page-item" className="form-page-item" 
                 name={`event.itinerary[${k}].type`}            
-
-                {...register(`event[${nestIndex}].itinerary[${k}].type`)}>
+                {...register(`event.itinerary[${k}].type`)}>
                 <option value="">select option</option>
                 <option value="Restaurant">restaurant</option>
                 <option value="Hotel">hotel</option>
@@ -31,19 +28,18 @@ export default function ItineraryForm({ control, register, nestIndex}:any) {
                 <option value="Concert">concert</option>
               </select>
 
-
-              <input id="itinerary-page-item" className="form-page-input-field"              
+              <input id="itinerary-page-item" className="form-page-item"
                 name={`event.itinerary[${k}].name`}            
-                {...register(`event[${nestIndex}].itinerary[${k}].name`)}
+                {...register(`event.itinerary[${k}].name`)}
               />
               
-              <input id="itinerary-page-item" className="form-page-input-field"
+              <input id="itinerary-page-item" className="form-page-item"
                 type="datetime-local"
                 name={`event.itinerary[${k}].date_time`}            
-                {...register(`event[${nestIndex}].itinerary[${k}].date_time`)}
+                {...register(`event.itinerary[${k}].date_time`)}
               />
 
-              <button className="button" type="button" onClick={() => remove(k)}>
+              <button type="button" onClick={() => remove(k)}>
                 delete
               </button>
 
@@ -52,7 +48,7 @@ export default function ItineraryForm({ control, register, nestIndex}:any) {
         })}
       
 
-        <button className="button page-alignment itinerary-button"
+        <button className="page-alignment itinerary-button"
           type="button"
           onClick={() => {
             append(null);
@@ -66,3 +62,4 @@ export default function ItineraryForm({ control, register, nestIndex}:any) {
 }
 
 
+//{...register(`event[${nestIndex}].itinerary[${k}].name`)}

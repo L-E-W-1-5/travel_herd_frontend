@@ -20,8 +20,8 @@ export default function MembersForm({ control, register}:any) {
          
               <label  className="form-page-label"> 
               <input placeholder="&nbsp;" id="member-page-item" className="form-page-input-field"
-                name={`member[${index}].name`}            
-                {...register(`member[${index}].name`)}
+                name={`member[${index}].user_name`}            
+                {...register(`member[${index}].user_name`)}
               />
               <span className="placeholder">name</span> 
               </label>

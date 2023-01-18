@@ -12,7 +12,7 @@ import CategoryForm from './Another FormAgain/CategoryForm'
 
 
 // import Navbar from '../NavBar/NavBar';
-
+const url = 'http://localhost:3001/api'
 
 const CreateTrip = ({setTripDetails, pageSelect}:any) => {
 
@@ -37,8 +37,10 @@ const CreateTrip = ({setTripDetails, pageSelect}:any) => {
         next
     } = useMultistepForm([ 
        
-    <NewForm ActualObj={object} CreatingObj={setObject}/>,
-    <CategoryForm ActualObj={object}/>,
+        <GroupForm {...{register, errors}}/>, 
+        <DateForm {...{ control, register, errors}}/>, 
+        <MembersForm {...{ control, register, errors}}/>, 
+        <MultipleEventForm {...{ control, register, errors, getValues, setValue}}/>
     
 ])
 
@@ -48,19 +50,33 @@ const CreateTrip = ({setTripDetails, pageSelect}:any) => {
 
 function onSubmit(data: any) {
     if(user?.sub){
-    data.Admin = user?.sub  // TODO: Create a fetch request to retrieve the trip ID and save the trip to a database.
+    data.admin_id = user?.sub  // TODO: Create a fetch request to retrieve the trip ID and save the trip to a database.
                             // TODO: Create a function that changes state in the dashboard component to 'data'.
     }
     console.log(data)
     next()
 
     if(isLastStep){
+        onFetch(data)
         setTripDetails(data)    // TODO: maybe use local storage to save the details of the form while logging in?
         pageSelect("details")
     }
   
     
 }
+
+async function onFetch(data:any) {
+    const res = await fetch(`${url}/object`, {
+        method: 'POST',
+
+        headers: { "Content-Type": "application/json"},
+
+        body: JSON.stringify(data)
+    })
+    let reply = await res.json()
+    console.log(reply)
+}
+
 
 
     return (<>

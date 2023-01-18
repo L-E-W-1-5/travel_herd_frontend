@@ -4,7 +4,7 @@ import VoteWrapper from './VoteWrapper/VoteWrapper'
 
 
 
-const TripDetails = ({tripDetails1}:any) => {
+const TripDetails = ({tripDetails}:any) => {
 
     const [dateVote, setDataVote] = useState(false)
     const [itinereryVote, setItineraryVote] = useState(false)                             
@@ -15,7 +15,7 @@ const TripDetails = ({tripDetails1}:any) => {
        
 
 
-    const tripDetails = {
+    const tripDetails1 = {
         group: 'holiday',
         date: [
                 {
@@ -124,19 +124,7 @@ const TripDetails = ({tripDetails1}:any) => {
         setDataVote(current => !current)
     }
 
-//css merge conflict
-    function renderFields(fields:any) {  // TODO: figure out a way to conditionally render the component, then get it to disappear once a vote has been cast..
-                                        // maybe have the functionality in a seperate component that we render instead of a div?
-       
-        return fields.map((field:any) => {
-            
-            return <div key={Math.random() * 100}>
-                        <p>from: {field['from']}  to: {field['to']}</p>     
-                        <button className="button" onClick={() => {closePopup()
-                        }}>vote</button>
-                    </div>
-        })
-//development merge conflict
+
     function handleItinerary() {
         setItineraryVote(current => !current)
     }
