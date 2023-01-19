@@ -174,7 +174,7 @@ const TripDetails = ({tripDetails}:any) => {
                 
                     
                 <p>trip members:</p>
-                {tripDetails.member.length > 1 ? tripDetails.member.map((mem:any) => {return <p>{mem.name}</p>}) : <p>{tripDetails.member[0].name}</p>}
+                {tripDetails.member.length > 1 ? tripDetails.member.map((mem:any) => {return <p>{mem.user_name}</p>}) : <p>{tripDetails.member[0].user_name}</p>}
 
                 {tripDetails.event.length > 1 ? <button onClick={handleItinerary}>vote on itinerary!</button> : 
                                                 <p>itinerary: {tripDetails.event[0].itinerary[0].type}</p>}
