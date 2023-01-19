@@ -1,5 +1,5 @@
 import "./dashboard.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CreateTrip from "../CreateTrip/createTrip";
 import JoinTrip from "../JoinTripPage/joinTrip";
 import ViewTrips from "../ViewTripsPage/viewTripsPage";
@@ -14,31 +14,46 @@ import Footer from "../Footer/footer";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { IoMdCreate } from "react-icons/io";
 import { ImBinoculars } from "react-icons/im";
-import userEvent from "@testing-library/user-event";
+//import userEvent from "@testing-library/user-event";
+
+const domain = "dev-otxf3y3m35xq561z.uk.auth0.com"
+const url = "localhost:3001"
 
 const Dashboard = () => {
 
   const [currentTrip, setCurrentTrip] = useState({});
 
-  const [page, setPage] = useState("dashboard")
+  const [page, setPage] = useState("login")
 
-  const { isAuthenticated, user } = useAuth0(); // user, , getAccessTokenSilently
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0(); // user, 
 
+useEffect(() => {
+console.log("here?")
+  const getUserToken = async () => {
 
+  const accessToken = await getAccessTokenSilently({
 
-  const id = user?.sub
+      audience: `https://${domain}/api/v2/`,
+  
+    }); 
+    console.log(accessToken)
 
-  function openTripsPage(){
-    getAllTrips(id);
-    handlePage("view");
+    const response = await fetch(`http://${url}/api/users/${user?.sub}`,
+      {headers:{
+                  Authorization: `Bearer ${accessToken}`,
+                  "content-type": "application/json"    // TODO: also need to send name and email to save in the user database.
+               }
+    });
+    const res = await response.json()
+    console.log(res)
+    
   }
-console.log(id)
+    getUserToken()
 
-  async function getAllTrips(id:any){
-    const res = await fetch(`http://localhost:3001/api/trip/${id}`)
-    const json = await res.json()
-    console.log(json)
-  }
+}, [getAccessTokenSilently, user?.sub, isAuthenticated])
+
+
+
 
   function handlePage(page:string) {
     console.log(page)
@@ -82,7 +97,7 @@ console.log(id)
           <div
             className="dashboard-container"
             onClick={() => {
-              openTripsPage();
+              handlePage("view");
             }}
           >
             <ImBinoculars className="icon" />
