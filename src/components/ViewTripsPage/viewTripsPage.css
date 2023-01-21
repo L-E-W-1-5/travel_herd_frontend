@@ -31,3 +31,11 @@
         cursor: pointer;
         background-image: none;
 }
+
+.carousel {
+    position:absolute;
+    z-index: 999;
+    top:50%;
+    /* width: 500px; */
+    background-color: black;;
+}

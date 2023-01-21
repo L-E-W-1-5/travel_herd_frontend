@@ -14,7 +14,7 @@ import CategoryForm from './Another FormAgain/CategoryForm'
 // import Navbar from '../NavBar/NavBar';
 const url = 'http://localhost:3001/api'
 
-const CreateTrip = ({setTripDetails, pageSelect}:any) => {
+const CreateTrip = ({setTripDetails, pageSelect, reFetch}:any) => {
 
     const [object, setObject] = useState({})
 
@@ -24,7 +24,7 @@ const CreateTrip = ({setTripDetails, pageSelect}:any) => {
         handleSubmit,
         getValues,
         setValue,
-        //reset,
+        reset,
         formState: { errors }
     } = useForm();
 
@@ -34,7 +34,8 @@ const CreateTrip = ({setTripDetails, pageSelect}:any) => {
         isFirstStep,
         isLastStep,
         back,
-        next
+        next,
+        setCurrentStepIndex
     } = useMultistepForm([ 
        
         <GroupForm {...{register, errors}}/>, 
@@ -48,7 +49,7 @@ const CreateTrip = ({setTripDetails, pageSelect}:any) => {
 
 
 
-function onSubmit(data: any) {
+async function onSubmit(data: any) {
     if(user?.sub){
     data.admin_id = user?.sub  // TODO: Create a fetch request to retrieve the trip ID and save the trip to a database.
                             // TODO: Create a function that changes state in the dashboard component to 'data'.
@@ -57,9 +58,13 @@ function onSubmit(data: any) {
     next()
 
     if(isLastStep){
-        onFetch(data)
-        setTripDetails(data)    // TODO: maybe use local storage to save the details of the form while logging in?
-        pageSelect("details")
+        const reply = await onFetch(data)
+        setTripDetails(reply.payload)    // TODO: maybe use local storage to save the details of the form while logging in?
+        reFetch((current:any) => !current)
+        alert("your trip has been saved, go to 'view trips' to see it.")
+        pageSelect("dashboard")
+        reset()
+        setCurrentStepIndex(0)
     }
   
     
@@ -75,6 +80,7 @@ async function onFetch(data:any) {
     })
     let reply = await res.json()
     console.log(reply)
+    return reply
 }
 
 

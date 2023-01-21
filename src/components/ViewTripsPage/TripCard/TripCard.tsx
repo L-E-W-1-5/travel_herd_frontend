@@ -1,13 +1,9 @@
 import './TripCard.css'
 
-const TripCard = ({trip, handlePage, tripDetails}:any) => {
+const TripCard = ({trip, handlePage, setTripDetails}:any) => {
 //console.log(trip[0].trip_name)
 
 async function getTripDetails() {
-
-
-
-
 
     const res = await fetch(`http://localhost:3001/api/trip/${trip.trip_id}`, {
 
@@ -21,16 +17,16 @@ async function getTripDetails() {
 
 
 function handleClick() {
-    getTripDetails()
+   // getTripDetails()
     handlePage("details")
-    tripDetails(trip)
+    setTripDetails(trip)
     
 }
 
     return (<>
         {trip && 
     <div className="trip-card" onClick={handleClick}>
-        <h3>trip</h3> 
+        <h3>{trip.trip_name}</h3> 
     </div>}
     </>)
 }

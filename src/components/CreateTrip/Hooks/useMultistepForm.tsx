@@ -36,6 +36,7 @@ const useMultistepForm = (steps: ReactElement[]) => {
         goTo,
         next,
         back,
+        setCurrentStepIndex,
     }
 }
 

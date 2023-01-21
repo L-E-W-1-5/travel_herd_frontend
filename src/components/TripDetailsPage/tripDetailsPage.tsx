@@ -147,17 +147,17 @@ const TripDetails = ({tripDetails}:any) => {
     }
 
     
-  
+  console.log(tripDetails)
 
     return <div className="trip-details-page">
 
             <div className="details-layout">  
-                {tripDetails.group && <div className="details-layout">
-                <h1>{tripDetails.group}</h1>
+                {tripDetails.trip_name && <div className="details-layout">
+                <h1>{tripDetails.trip_name}</h1>
 
                 <p>destination: {tripDetails.destination}</p>
 
-                {tripDetails.date.length > 1 ?  <button onClick={handleDate}>vote on the dates!</button> : 
+                {/* {tripDetails.date.length > 1 ?  <button onClick={handleDate}>vote on the dates!</button> : 
                                                 <p>date from: {tripDetails.date[0].from} date to: {tripDetails.date[0].to}</p>}
 
                 {dateVote && <VoteWrapper title="vote on the dates">
@@ -192,7 +192,7 @@ const TripDetails = ({tripDetails}:any) => {
                             </div>
                         })}
                         <button className="vote-form-button" onClick={handleItinerary}>close</button>
-                    </VoteWrapper>}
+                    </VoteWrapper>} */}
 
                 </div>}
             </div>

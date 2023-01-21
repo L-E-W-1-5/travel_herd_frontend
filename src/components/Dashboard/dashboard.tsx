@@ -23,11 +23,16 @@ const Dashboard = () => {
 
   const [currentTrip, setCurrentTrip] = useState({});
 
-  const [page, setPage] = useState("login")
+  const [allTrips, setAllTrips] = useState([])
 
-  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0(); // user, 
+  const [page, setPage] = useState("login")
+  
+  const { isAuthenticated, user, getAccessTokenSilently } = useAuth0(); 
+
+  const [reFetch, setFetch] = useState(true) 
 
 useEffect(() => {
+
 console.log("here?")
   const getUserToken = async () => {
 
@@ -39,18 +44,21 @@ console.log("here?")
     console.log(accessToken)
 
     const response = await fetch(`http://${url}/api/users/${user?.sub}`,
-      {headers:{
+      {
+        method: 'POST',
+        headers:{
                   Authorization: `Bearer ${accessToken}`,
                   "content-type": "application/json"    // TODO: also need to send name and email to save in the user database.
-               }
+               },
+               body: JSON.stringify(user)
     });
     const res = await response.json()
     console.log(res)
-    
+    setAllTrips(res.payload)
   }
     getUserToken()
 
-}, [getAccessTokenSilently, user?.sub, isAuthenticated])
+}, [getAccessTokenSilently, user, isAuthenticated, reFetch])
 
 
 
@@ -117,11 +125,13 @@ console.log("here?")
         <CreateTrip
           setTripDetails={setCurrentTrip}
           pageSelect={handlePage}
+          reFetch={setFetch}
         ></CreateTrip>
       </div>
 
       <div className={ page === "view" ? "open" : "closed"}>
         <ViewTrips
+          currentTrips={allTrips}
           setTripDetails={setCurrentTrip}
           pageSelect={handlePage}
         ></ViewTrips>
