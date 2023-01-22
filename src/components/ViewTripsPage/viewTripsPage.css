@@ -17,6 +17,7 @@
     flex-direction: row;
     margin-bottom: 0;
     margin-bottom: 20%;
+    flex-wrap: wrap;
 }
 .trip-card {
     background: var(--red-brown);

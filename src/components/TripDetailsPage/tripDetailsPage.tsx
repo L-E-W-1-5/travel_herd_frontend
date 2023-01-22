@@ -7,7 +7,9 @@ import { useAuth0 } from '@auth0/auth0-react'
 const TripDetails = ({pageSelect, tripDetails}:any) => {
 
     const [dateVote, setDataVote] = useState(false)
-    const [itinereryVote, setItineraryVote] = useState(false)                             
+
+    const [itinereryVote, setItineraryVote] = useState(false)                            
+
     const { user} = useAuth0() //, isAuthenticated, getAccessTokenSilently
 
     // TODO: figure out a way to conditionally render the component, then get it to disappear once a vote has been cast..
@@ -121,22 +123,29 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
         //console.log(tripDetails)
 
     function handleDate() {
+
         setDataVote(current => !current)
     }
 
 
     function handleItinerary() {
+
         setItineraryVote(current => !current)
     }
 
     function handleAll() {
+
         setDataVote(false)
+
         setItineraryVote(false)
+
 //development merge conflict
     }
 
     function registerVote(vote:any) {
+
         console.log(vote.choice, "has been voted on") // TODO: fetch request called here to add a vote to the corresponding choice
+
         alert("your vote has been registered.")
 
         saveDateVote(vote)
@@ -145,7 +154,9 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
     }
 
     async function saveDateVote(vote:any){  // TODO: need to check and/or add to the voted_user table to see if user has already voted before registering vote
+
         const response = await fetch(`http://localhost:3001/api/voting/${user?.sub}`, {
+
             method: 'POST',
 
             headers: { "Content-Type": "application/json"},
@@ -153,12 +164,41 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
             body: JSON.stringify(vote)
         })
         const data = await response.json()
-        console.log(data)
+
+        console.log(data.payload)
+
+        if (data.payload.message === "you have already voted"){
+
+            alert("you have already voted on these dates.")
+        }
     }
 
     function registerItineraryItem(item:any) {
+
         console.log(item.type)
+
         alert("your vote has been registered")
+
+        saveItineraryVote(item)
+    }
+
+    async function saveItineraryVote(item:any) {
+        const response = await fetch(`http://localhost:3001/api/voting/${user?.sub}`, {
+
+            method: 'POST',
+
+            headers: { "Content-Type": "application/json"},
+    
+            body: JSON.stringify(item)
+        })
+        const data = await response.json()
+
+        console.log(data.payload)
+
+        if (data.payload.message === "you have already voted"){
+
+            alert("you have already voted on these dates.")
+        }
     }
 
     
@@ -167,46 +207,68 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
     return <div className="trip-details-page">
 
             <div className="details-layout">  
+
                 {tripDetails.trip_name && <div className="details-layout">
+
                 <h1>{tripDetails.trip_name}</h1>
 
                 <p>destination: {tripDetails.destination}</p>
 
+                {tripDetails.date_choices[0].chosen !== null ? <div>{tripDetails.date_choices.chosen} won the vote with {tripDetails.date_choices.vote_count}</div> : <div>
+
+                {tripDetails.date_choices.length > 0 && <div>
+
                  {tripDetails.date_choices.length > 1 ?  <button onClick={handleDate}>vote on the dates!</button> : 
+
                                                 <p>date {tripDetails.date_choices[0].choice}</p>}
+                </div>
+                }
+                {tripDetails.total_date_votes === tripDetails.no_of_users ? <h1>all voted</h1> : <div>
 
                 {dateVote && <VoteWrapper title="vote on the dates">
                     
                      {tripDetails.date_choices.map((d:any) => { 
+
                           // TODO: will change to date id
                          return <div onClick={() => {registerVote(d)}}>   
+
                              <span className='clicked-event'>from: {d.choice}</span>
                              </div>
                      })}
                      <button className="vote-form-button" onClick={handleDate}>close</button>
                      </VoteWrapper>}
-
+                     </div>
+                    }
+                   </div> }
                 
                     
                 <p>joined members {tripDetails.members.length} out of {tripDetails.no_of_users}</p>
+
                 {tripDetails.members.length > 1 ? tripDetails.members.map((mem:any) => {return <p>{mem.user_name}</p>}) : <p>{tripDetails.members[0].name}</p>}
 
+
                 {tripDetails.itinerary.length > 1 ? <button onClick={handleItinerary}>vote on itinerary!</button> : 
+
                                                 <p>itinerary: {tripDetails.itinerary[0].voting[0].type}</p>}
 
                 {itinereryVote && <VoteWrapper title="vote on the itinerary">
+
                         {tripDetails.itinerary.map((events:any) => {
+
                            return <div>
+
                             <p>event</p>
+
                             { events.voting.map((event:any) => {
-                                return <div>  
-                                                                    
+
+                                return <div>                                                             
                                     <span  id='clicked-event' onClick={() => {registerItineraryItem(event)}}>{event.type} - {event.choice} - {event.date_time}</span>
                                 </div>
                         })}
                             </div>
                         })}
                         <button className="vote-form-button" onClick={handleItinerary}>close</button>
+
                     </VoteWrapper>} 
 
                 </div>}
