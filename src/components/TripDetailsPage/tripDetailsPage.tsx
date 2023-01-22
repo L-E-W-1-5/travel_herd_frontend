@@ -1,14 +1,14 @@
 import './tripDetailsPage.css'
 import {useState} from 'react'
 import VoteWrapper from './VoteWrapper/VoteWrapper'
+import { useAuth0 } from '@auth0/auth0-react'
 
 
-
-const TripDetails = ({tripDetails}:any) => {
+const TripDetails = ({pageSelect, tripDetails}:any) => {
 
     const [dateVote, setDataVote] = useState(false)
     const [itinereryVote, setItineraryVote] = useState(false)                             
-  
+    const { user} = useAuth0() //, isAuthenticated, getAccessTokenSilently
 
     // TODO: figure out a way to conditionally render the component, then get it to disappear once a vote has been cast..
                                         // maybe have the functionality in a seperate component that we render instead of a div?
@@ -136,9 +136,24 @@ const TripDetails = ({tripDetails}:any) => {
     }
 
     function registerVote(vote:any) {
-        console.log(vote.from, "has been voted on") // TODO: fetch request called here to add a vote to the corresponding choice
+        console.log(vote.choice, "has been voted on") // TODO: fetch request called here to add a vote to the corresponding choice
         alert("your vote has been registered.")
+
+        saveDateVote(vote)
+
         handleAll()
+    }
+
+    async function saveDateVote(vote:any){  // TODO: need to check and/or add to the voted_user table to see if user has already voted before registering vote
+        const response = await fetch(`http://localhost:3001/api/voting/${user?.sub}`, {
+            method: 'POST',
+
+            headers: { "Content-Type": "application/json"},
+    
+            body: JSON.stringify(vote)
+        })
+        const data = await response.json()
+        console.log(data)
     }
 
     function registerItineraryItem(item:any) {
@@ -157,15 +172,15 @@ const TripDetails = ({tripDetails}:any) => {
 
                 <p>destination: {tripDetails.destination}</p>
 
-                {/* {tripDetails.date.length > 1 ?  <button onClick={handleDate}>vote on the dates!</button> : 
-                                                <p>date from: {tripDetails.date[0].from} date to: {tripDetails.date[0].to}</p>}
+                 {tripDetails.date_choices.length > 1 ?  <button onClick={handleDate}>vote on the dates!</button> : 
+                                                <p>date {tripDetails.date_choices[0].choice}</p>}
 
                 {dateVote && <VoteWrapper title="vote on the dates">
                     
-                     {tripDetails.date.map((d:any) => { 
+                     {tripDetails.date_choices.map((d:any) => { 
                           // TODO: will change to date id
                          return <div onClick={() => {registerVote(d)}}>   
-                             <span className='clicked-event'>from: {d.to} to: {d.from}</span>
+                             <span className='clicked-event'>from: {d.choice}</span>
                              </div>
                      })}
                      <button className="vote-form-button" onClick={handleDate}>close</button>
@@ -173,28 +188,29 @@ const TripDetails = ({tripDetails}:any) => {
 
                 
                     
-                <p>trip members:</p>
-                {tripDetails.member.length > 1 ? tripDetails.member.map((mem:any) => {return <p>{mem.user_name}</p>}) : <p>{tripDetails.member[0].user_name}</p>}
+                <p>joined members {tripDetails.members.length} out of {tripDetails.no_of_users}</p>
+                {tripDetails.members.length > 1 ? tripDetails.members.map((mem:any) => {return <p>{mem.user_name}</p>}) : <p>{tripDetails.members[0].name}</p>}
 
-                {tripDetails.event.length > 1 ? <button onClick={handleItinerary}>vote on itinerary!</button> : 
-                                                <p>itinerary: {tripDetails.event[0].itinerary[0].type}</p>}
+                {tripDetails.itinerary.length > 1 ? <button onClick={handleItinerary}>vote on itinerary!</button> : 
+                                                <p>itinerary: {tripDetails.itinerary[0].voting[0].type}</p>}
 
                 {itinereryVote && <VoteWrapper title="vote on the itinerary">
-                        {tripDetails.event.map((events:any) => {
+                        {tripDetails.itinerary.map((events:any) => {
                            return <div>
                             <p>event</p>
-                            { events.itinerary.map((event:any) => {
+                            { events.voting.map((event:any) => {
                                 return <div>  
                                                                     
-                                    <span  id='clicked-event' onClick={() => {registerItineraryItem(event)}}>{event.type} - {event.name} - {event.date_time}</span>
+                                    <span  id='clicked-event' onClick={() => {registerItineraryItem(event)}}>{event.type} - {event.choice} - {event.date_time}</span>
                                 </div>
                         })}
                             </div>
                         })}
                         <button className="vote-form-button" onClick={handleItinerary}>close</button>
-                    </VoteWrapper>} */}
+                    </VoteWrapper>} 
 
                 </div>}
+                <button onClick={() => {pageSelect("view")}}>back</button>
             </div>
            
        </div> 
@@ -202,3 +218,156 @@ const TripDetails = ({tripDetails}:any) => {
 
 export default TripDetails
 
+/*
+
+admin_id: "google-oauth2|113087777562836660178"
+​​​
+all_joined: false
+​​​
+all_voted: false
+​​​
+date_choices: Array [ {…}, {…} ]
+​​​​
+0: Object { id: 10, choice: "from: 2023-01-15 to: 2023-01-16", vote_count: 0, … }
+​​​​​
+choice: "from: 2023-01-15 to: 2023-01-16"
+​​​​​
+chosen: null
+​​​​​
+id: 10
+​​​​​
+trip_id: 52
+​​​​​
+vote_count: 0
+​​​​​
+<prototype>: Object { … }
+​​​​
+1: Object { id: 11, choice: "from: 2023-01-15 to: 2023-01-23", vote_count: 0, … }
+​​​​​
+choice: "from: 2023-01-15 to: 2023-01-23"
+​​​​​
+chosen: null
+​​​​​
+id: 11
+​​​​​
+trip_id: 52
+​​​​​
+vote_count: 0
+​​​​​
+<prototype>: Object { … }
+​​​​
+length: 2
+​​​​
+<prototype>: Array []
+​​​
+destination: "soc"
+​​​
+itinerary: Array [ {…}, {…} ]
+​​​​
+0: Object { id: 96, trip_id: 52, choice: null, … }
+​​​​​
+choice: null
+​​​​​
+id: 96
+​​​​​
+trip_id: 52
+​​​​​
+voting: Array [ {…}, {…} ]
+​​​​​​
+0: Object { id: 74, itinerary_id: 96, choice: "band", … }
+​​​​​​​
+choice: "band"
+​​​​​​​
+date_time: "2023-01-23T12:12"
+​​​​​​​
+id: 74
+​​​​​​​
+itinerary_id: 96
+​​​​​​​
+type: "Concert"
+​​​​​​​
+vote_count: 0
+​​​​​​​
+<prototype>: Object { … }
+​​​​​​
+1: Object { id: 75, itinerary_id: 96, choice: "beach", … }
+​​​​​​​
+choice: "beach"
+​​​​​​​
+date_time: "2023-01-22T11:11"
+​​​​​​​
+id: 75
+​​​​​​​
+itinerary_id: 96
+​​​​​​​
+type: "Tour"
+​​​​​​​
+vote_count: 0
+​​​​​​​
+<prototype>: Object { … }
+​​​​​​
+length: 2
+​​​​​​
+<prototype>: Array []
+​​​​​
+<prototype>: Object { … }
+​​​​
+1: Object { id: 97, trip_id: 52, choice: null, … }
+​​​​​
+choice: null
+​​​​​
+id: 97
+​​​​​
+trip_id: 52
+​​​​​
+voting: Array [ {…}, {…} ]
+​​​​​​
+0: Object { id: 76, itinerary_id: 97, choice: "festival", … }
+​​​​​​​
+choice: "festival"
+​​​​​​​
+date_time: "2023-01-29T22:22"
+​​​​​​​
+id: 76
+​​​​​​​
+itinerary_id: 97
+​​​​​​​
+type: "Attraction"
+​​​​​​​
+vote_count: 0
+​​​​​​​
+<prototype>: Object { … }
+​​​​​​
+1: Object { id: 77, itinerary_id: 97, choice: "fair", … }
+​​​​​​​
+choice: "fair"
+​​​​​​​
+date_time: "2023-01-25T02:02"
+​​​​​​​
+id: 77
+​​​​​​​
+itinerary_id: 97
+​​​​​​​
+type: "Attraction"
+​​​​​​​
+vote_count: 0
+​​​​​​​
+<prototype>: Object { … }
+​​​​​​
+length: 2
+​​​​​​
+<prototype>: Array []
+​​​​​
+<prototype>: Object { … }
+​​​​
+length: 2
+​​​​
+<prototype>: Array []
+​​​
+no_of_users: 2
+​​​
+trip_id: 52
+​​​
+trip_name: "victory"
+
+*/

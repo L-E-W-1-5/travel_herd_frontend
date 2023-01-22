@@ -59,7 +59,7 @@ async function onSubmit(data: any) {
 
     if(isLastStep){
         const reply = await onFetch(data)
-        setTripDetails(reply.payload)    // TODO: maybe use local storage to save the details of the form while logging in?
+        //setTripDetails(reply.payload)    // TODO: maybe use local storage to save the details of the form while logging in?
         reFetch((current:any) => !current)
         alert("your trip has been saved, go to 'view trips' to see it.")
         pageSelect("dashboard")
