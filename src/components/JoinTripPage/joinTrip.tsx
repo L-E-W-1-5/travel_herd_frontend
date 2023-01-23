@@ -17,9 +17,9 @@ function handleSubmit(e:any) {
      console.log(tripUsername)
     console.log(tripID)         // TODO: // post request here to add trip to a user
 
-
+// reFetch((current:any) => !current)
     addTripToUserTable();
-
+    props.reFetch((current:any) => !current)
     props.pageSelect("dashboard")
                                     // TODO: add a state in dashboard that can force a reload of a useeffect so we can grab all the trips the user is a member of after joining a new one
     setTripID("")

@@ -14,7 +14,7 @@ import Footer from "../Footer/footer";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { IoMdCreate } from "react-icons/io";
 import { ImBinoculars } from "react-icons/im";
-//import userEvent from "@testing-library/user-event";
+//import userEvent from "@testing-library/user-event"
 
 const domain = "dev-otxf3y3m35xq561z.uk.auth0.com"
 const url = "localhost:3001"
@@ -146,10 +146,13 @@ console.log("here?")
       )}
 
       <div className={ page === "join" ? "open" : "closed"}>
-        <JoinTrip pageSelect={handlePage}></JoinTrip>
+        <JoinTrip 
+          pageSelect={handlePage}
+          reFetch={setFetch}
+          ></JoinTrip>
       </div>
     </div>
   );
 };
-
+      // TODO: send reFetch down to tripDetails
 export default Dashboard;

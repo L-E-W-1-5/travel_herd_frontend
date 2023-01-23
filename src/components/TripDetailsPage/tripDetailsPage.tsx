@@ -175,7 +175,7 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
 
     function registerItineraryItem(item:any) {
 
-        console.log(item.type)
+        console.log(item)
 
         alert("your vote has been registered")
 
@@ -183,6 +183,7 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
     }
 
     async function saveItineraryVote(item:any) {
+        console.log(item)
         const response = await fetch(`http://localhost:3001/api/voting/${user?.sub}`, {
 
             method: 'POST',
@@ -244,12 +245,16 @@ const TripDetails = ({pageSelect, tripDetails}:any) => {
                     
                 <p>joined members {tripDetails.members.length} out of {tripDetails.no_of_users}</p>
 
-                {tripDetails.members.length > 1 ? tripDetails.members.map((mem:any) => {return <p>{mem.user_name}</p>}) : <p>{tripDetails.members[0].name}</p>}
+                {tripDetails.members.length > 1 ? tripDetails.members.map((mem:any) => {return <p>{mem.name}</p>}) : <p>{tripDetails.members[0].name}</p>}
 
 
                 {tripDetails.itinerary.length > 1 ? <button onClick={handleItinerary}>vote on itinerary!</button> : 
 
-                                                <p>itinerary: {tripDetails.itinerary[0].voting[0].type}</p>}
+                                                <ul style={{listStyle:"none"}}>
+                                                    <li>{tripDetails.itinerary[0].voting[0].type}</li>
+                                                    <li>{tripDetails.itinerary[0].voting[0].choice}</li>
+                                                    <li>{tripDetails.itinerary[0].voting[0].date_time}</li>
+                                                </ul>}
 
                 {itinereryVote && <VoteWrapper title="vote on the itinerary">
 
