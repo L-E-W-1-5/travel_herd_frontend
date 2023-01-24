@@ -7,7 +7,7 @@
     position: fixed;
     background: var(--beige);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
 }
@@ -15,9 +15,10 @@
 .view-trip-form-item {
     display: flex;
     flex-direction: row;
-    margin-bottom: 0;
-    margin-bottom: 20%;
-    flex-wrap: wrap;
+    overflow-x: scroll;
+    width: 90vw;
+    /* margin-top: 10%; */
+    /* flex-wrap: wrap; */
 }
 .trip-card {
     background: var(--red-brown);
@@ -39,4 +40,8 @@
     top:50%;
     /* width: 500px; */
     background-color: black;;
+}
+
+.view-trip-cancel-button {
+    margin: 50px;
 }
