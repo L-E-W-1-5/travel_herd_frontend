@@ -141,7 +141,7 @@ console.log("here?")
         <div
           className={ page === "details" ? "open" : "closed" }
         >
-          <TripDetails pageSelect={handlePage} tripDetails={currentTrip}></TripDetails>
+          <TripDetails pageSelect={handlePage} tripDetails={currentTrip} currentTrips={allTrips}></TripDetails>
         </div>
       )}
 

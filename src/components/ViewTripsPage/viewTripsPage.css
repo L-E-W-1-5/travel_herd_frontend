@@ -16,7 +16,10 @@
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
-    width: 90vw;
+    width: 91vw;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
     /* margin-top: 10%; */
     /* flex-wrap: wrap; */
 }
@@ -34,13 +37,17 @@
         background-image: none;
 }
 
-.carousel {
-    position:absolute;
-    z-index: 999;
-    top:50%;
-    /* width: 500px; */
-    background-color: black;;
+.carousel-button-left {
+   position: fixed;
+   left: 2vw;
+   top: 51vh;
 }
+
+.carousel-button-right {
+    position: fixed;
+    right: 2vw;
+    top: 51vh;
+ }
 
 .view-trip-cancel-button {
     margin: 50px;
