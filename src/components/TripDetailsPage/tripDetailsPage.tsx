@@ -225,7 +225,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                             <p>out of {tripDetails.no_of_users} people</p>
                             </div>
 
-                            <BarChart width={500} height={450} data={tripDetails.date_choices.vote_count}>
+                            <BarChart width={500} height={450} data={tripDetails.date_choices}>
                             <Bar dataKey="vote_count" fill="green" />
                             <CartesianGrid stroke="#ccc" />
                             <XAxis dataKey="choice" />
