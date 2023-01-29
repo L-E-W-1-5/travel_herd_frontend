@@ -51,15 +51,25 @@ async function addTripToUserTable() {
         <h2 className='join-h2'>ask your trip organiser for the ID of your trip to see details and add your votes</h2>
 
         <form className="join-form-item" onSubmit={handleSubmit}>
+            <div className="info-box-join">
+                <div className="joining-info">
+                    <p>you will find the information needed to join a trip in an
+                    email as soon as you get invited to a trip. </p>
+                </div>
+                <div className="input-join-form">
             <label>Enter trip username:
                 <input className="input-field" type="text" onChange={(e) => {setTripUsername(e.target.value)}} value={tripUsername}></input>
             </label>
             <label>Enter trip ID:
                 <input className="input-field" type="text" onChange={(e) => {setTripID(e.target.value)}} value={tripID}></input>
             </label>
-            <input className = "submit-button" type="submit" value="submit"></input>
+            </div>
+            </div>
+            <input className = "submit-button submit-join" type="submit" value="submit"></input>
+            
         </form>
         <button className="join-cancel-button cancel-button" onClick={() => {props.pageSelect("dashboard")}}>cancel</button>
+        
     </div>
 }
 

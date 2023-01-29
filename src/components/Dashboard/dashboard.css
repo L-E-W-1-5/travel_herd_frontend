@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     height:100vh;
+    background-image: url(../../images/travel-bg.png);
     
 }
 
@@ -39,7 +40,8 @@
     border-radius: var(--border-radius);
     text-align: center;
     border: 3px solid var(--dark-orange);
-    cursor: pointer
+    cursor: pointer;
+    background-color: var(--beige);
 }
 
 #dashboard-btn-container div:hover{
@@ -62,6 +64,7 @@ h1 {
 
 .icon {
     font-size: 300%;
+    
 }
 
 
