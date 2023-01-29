@@ -1,22 +1,55 @@
 .view-trips-div{
 
-    top: 0%;
+    top: 110px;
     left: 0%;
     width: 100vw;
     height: 100vh;
     position: fixed;
     background: var(--beige);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    background-image: url(../../images/travel-bg.png);
 }
 
 .view-trip-form-item {
-  
-    margin-bottom: auto;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    width: 91vw;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    
+    /* margin-top: 10%; */
+    /* flex-wrap: wrap; */
+}
+.trip-card {
+    background: var(--red-brown);
+    color: var(--beige);
+    border: 3px solid var(--red-brown);
 }
 
+.trip-card:hover{
+        background-color: var(--green);
+        color: var(--beige);
+        border: 3px solid var(--green);
+        cursor: pointer;
+        background-image: none;
+}
+
+.carousel-button-left {
+   position: fixed;
+   left: 2vw;
+   top: 51vh;
+}
+
+.carousel-button-right {
+    position: fixed;
+    right: 2vw;
+    top: 51vh;
+ }
+
 .view-trip-cancel-button {
-    margin-bottom: 8%;
+    margin: 50px;
 }

@@ -1,113 +1,67 @@
 import "./viewTripsPage.css"
-
 import TripCard from "./TripCard/TripCard";
+import React, {useRef, useState} from 'react';
 
-const tripsArr = [
+let count = 0
 
+const ViewTrips = ({setTripDetails, pageSelect, currentTrips}:any) => { 
 
-     {
-        Admin: "newUser",
-        group: "Minty Blobfish",
-        destination: "aaaaa",
-        date: [
-                {
-                    name: "2023-01-11"
-                }
-              ],
-        event: [
-                {
-                    type: "Accomodation",
-                    location: "location",
-                    date: "2023-01-13T11:11"
-                }
-               ],
-        member: [
-                {
-                    name: "aaa",
-                    email: "aaa@aaaa.com"
-                }
-                ],
+    const myRef = useRef<null | HTMLDivElement>(null); 
+
+    const [scroll, setScroll] = useState(580)
+
+    function scrollWinRight() {
+        console.log(((count / 2) * 290) - 980)
+        if(scroll < ((count / 2) * 290)- 1350){
+        //setScroll(scroll + 580)
+       // console.log(scroll)
+        myRef.current?.scrollTo({
+            left: scroll + 580,
+            behavior: 'smooth'
+        });
+        setScroll(scroll + 580)
+        count = 0
+    }
+        //if (count > )
         
-     },
-     {
-        Admin: "newUser",
-        group: "Natasha's Group",
-        destination: "aaaaa",
-        date: [
-                {
-                    name: "2023-01-11"
-                }
-              ],
-        event: [
-                {
-                    type: "Accomodation",
-                    location: "location",
-                    date: "2023-01-13T11:11"
-                }
-               ],
-        member: [
-                {
-                    name: "aaa",
-                    email: "aaa@aaaa.com"
-                }
-                ],
-        
-     },
+    }
 
-     {
-        Admin: "newUser",
-        group: "Kylie's Group",
-        destination: "aaaaa",
-        date: [
-                {
-                    name: "2023-01-11"
-                }
-              ],
-        event: [
-                {
-                    type: "Accomodation",
-                    location: "location",
-                    date: "2023-01-13T11:11"
-                }
-               ],
-        member: [
-                {
-                    name: "aaa",
-                    email: "aaa@aaaa.com"
-                }
-                ],
-        
-     }
-
-]
-
-
-const ViewTrips = (props:any) => {
-
+    function scrollWinLeft() {
+        if (scroll > 290){
+       
+        console.log(scroll)
+        myRef.current?.scrollTo({
+            left: scroll -580,
+            behavior: 'smooth'
+        });
+        setScroll(scroll - 580)
+        count = 0
+    }
+    
+    }
   
     return (
-       <div className='view-trips-div'>
-
-       <div className="view-trip-form-item">
-            {/* <Navbar /> */}
-       </div>
-       
-       <div className="view-trip-form-item">
-       
-            {tripsArr.map((trip) => {
-                return (<div key={Math.random() * 10000}>
-
-
-                    <TripCard tripDetails={props.setTripDetails} handlePage={props.pageSelect} trip={trip}></TripCard>
-
-                </div>)
+        
+        <div className='view-trips-div'>
+            <h1>your trips</h1>
+    
+        <div  ref={myRef} className="view-trip-form-item"> 
+ 
+             {currentTrips.fullTripData && currentTrips.fullTripData.map((trip:any) => {
+                count++
+                return (       
+                    <TripCard key={Math.random() * 1000} className="trip-card" setTripDetails={setTripDetails} handlePage={pageSelect} trip={trip}></TripCard>
+                )
             })}
+        
         </div>
-        <button className="view-trip-cancel-button cancel-button" onClick={() => {props.pageSelect("dashboard")}}>cancel</button>
+            <button className="carousel-button-right" onClick={scrollWinRight}>right</button>
+            <button className="carousel-button-left" onClick={scrollWinLeft}>left</button>
+            <button className="view-trip-cancel-button cancel-button" onClick={() => {pageSelect("dashboard")}}>cancel</button>
         </div>
         
     )
-
 }
+
 
 export default ViewTrips;

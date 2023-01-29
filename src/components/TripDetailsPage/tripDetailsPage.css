@@ -1,20 +1,187 @@
 .trip-details-page {
-    top: 0%;
+    top: 8%;
     left: 0%;
     width: 100vw;
     height: 100vh;
     position: fixed;
     background: var(--beige);
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+    background-image: url(../../images/travel-bg.png);
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0%;
+}
+
+.options-boxes {   
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+}
+
+.option-box {
+    border: 3px solid var(--dark-orange);
+    background-color: var(--beige);
+    width: 30%;
+    margin: 0% 1% 3% 3%;
+    height: 60vh;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 2.5%;
+    align-items: center;
+}
+
+.info-box {
+    border: 3px solid var(--dark-orange);
+    background-color: var(--beige);
+    width: 60%;
+    margin: 0% 3% 3% 3%;
+    height: 60vh;
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.option-item {
+    margin: auto;
+    height: 40%;
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.option-item:hover {
+    background: var(--green);
+    color: var(--beige);
+    background-image: url(../../images/travel-bg.png);
+}
+
+.destination-info {
+    margin: auto;
+    display: flex;
+    justify-content: center;
     flex-direction: column;
 }
 
-.view-trip-form-item {
-    margin-bottom: auto;
+.details-back-button {
+    position: fixed;
+    top: 16%;
+    left: 3%;
 }
 
-.trip-details {
-    margin-bottom: auto;
+.trip-details-h2 {
+    color: var(--green)
+}
+
+.voting-chart {
+    display: flex;
+    flex-direction: row;
+}
+
+.votes-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.itinerary-dropdown {
+    position: relative;
+    margin-bottom: 60%;
+   
+}
+
+.itinerary-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.itinerary-voting-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.itinerary-choices-container {
+    display: flex;
+    gap: 20%;
+}
+
+.h2-vote-form {
+    color:var(--green);
+    align-self: flex-start;
+}
+
+.members-container {
+    display: flex;
+
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+
+
+
+
+
+
+
+#vote-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    top: 25%;
+    left: 30%;
+    position: fixed;
+    width: 40%;
+    height: 60%;
+    margin: auto;
+    background: var(--beige);
+    padding: 20px;
+    border: 3px solid black;
+    border-radius: 1rem;
+}
+
+.details-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--beige);
+    height: 70%;
+    width: 70%
+}
+
+.vote-form-button {
+    margin-top: auto;
+}
+
+
+
+
+
+label {
+    display: block;
+    /* background: lightgrey;
+    width: 100px;
+    height: 100px; */
+}
+
+#highlighted:checked + label {
+    background: blue;
+    color: white;
 }

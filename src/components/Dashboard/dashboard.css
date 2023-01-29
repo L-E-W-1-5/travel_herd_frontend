@@ -4,7 +4,12 @@
     align-items: center;
     justify-content: center;
     height:100vh;
+    background-image: url(../../images/travel-bg.png);
     
+}
+
+#dashboard-container{
+    width:100%;
 }
 
 #dashboard-btn-container{
@@ -34,8 +39,15 @@
     align-items: center;
     border-radius: var(--border-radius);
     text-align: center;
-    ;
-    cursor: pointer
+    border: 3px solid var(--dark-orange);
+    cursor: pointer;
+    background-color: var(--beige);
+}
+
+#dashboard-btn-container div:hover{
+    background-color: var(--green);
+    color: var(--beige);
+    border: 3px solid var(--green);
 }
 
 h1 {
@@ -52,15 +64,14 @@ h1 {
 
 .icon {
     font-size: 300%;
+    
 }
 
-.dashboard-container {
-   
-    border: 3px solid var(--dark-orange);
-}
+
 
 .navbar-dashboard {
     margin-bottom: auto;
+    width: 100%;
 }
 
 .open {
