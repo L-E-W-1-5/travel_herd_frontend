@@ -1,18 +1,18 @@
 import './tripDetailsPage.css'
 import {useState, useEffect} from 'react'
-import VoteWrapper from './VoteWrapper/VoteWrapper'
+//import VoteWrapper from './VoteWrapper/VoteWrapper'
 import { useAuth0 } from '@auth0/auth0-react'
-import { PieChart, Pie, BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts'
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts'
 
-let counter = 0;
+
 
 
 const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: current trips now has an array, votesCastByUser, that includes any id that has been voted on, for dates anyway
 //console.log(currentTrips.itineraryVotesCast)
 //console.log(tripDetails)
-    const [dateVote, setDataVote] = useState(false)
+    // const [dateVote, setDataVote] = useState(false)
 
-    const [itinereryVote, setItineraryVote] = useState(false)     
+    // const [itinereryVote, setItineraryVote] = useState(false)     
     
     const [dateVotedAlready, setDateAlreadyVoted] = useState(false)
 
@@ -45,12 +45,12 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
         //setItineraryVote(current => !current)
     }
 
-    function handleAll() {
+    // function handleAll() {
 
-        setDataVote(false)
+    //     setDataVote(false)
 
-        setItineraryVote(false)
-    }
+    //     setItineraryVote(false)
+    // }
 
     function registerVote(vote:any) {
 
@@ -60,7 +60,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
 
         saveDateVote(vote)
 
-        handleAll()
+        //handleAll()
     }
 
     async function saveDateVote(vote:any){  // TODO: need to check and/or add to the voted_user table to see if user has already voted before registering vote
@@ -131,7 +131,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
 
     function getItineraryIds() {
         console.log(currentTrips.itineraryVotesCast)
-        let arr = []
+       // let arr = []
 
         // for (let i = 0; i < currentTrips.itineraryVotesCast.length; i++){
         //     for (let x = 0; x < tripDetails.itinerary.length; x++){
@@ -212,9 +212,6 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                         {dateVotedAlready && <div className="voting-chart">
 
                             
-                            {/* <PieChart width={400} height={400}>
-                                <Pie data={tripDetails.date_choices} dataKey="vote_count" outerRadius={150} fill="green"/>
-                            </PieChart> */}
                             <div className="votes-container">
                             {tripDetails.date_choices.map((d:any) => { 
 
@@ -228,7 +225,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                             <p>out of {tripDetails.no_of_users} people</p>
                             </div>
 
-                            <BarChart width={500} height={450} data={tripDetails.date_choices}>
+                            <BarChart width={500} height={450} data={tripDetails.date_choices.vote_count}>
                             <Bar dataKey="vote_count" fill="green" />
                             <CartesianGrid stroke="#ccc" />
                             <XAxis dataKey="choice" />
@@ -285,7 +282,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                                                             <p>out of {tripDetails.no_of_users} people</p>
                                                             </>}
                                                             
-                                                        
+                                                            {chosenItineraryEvent ? <div>{chosenItineraryEvent}</div> : <div>
                                                         {event && !itineraryCatVoted && <div className="itinerary-item">
                                                                     {tripDetails.itinerary.filter((item:any) => item.id === Number(event)).map((e:any) => {
                                                                         
@@ -301,6 +298,8 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                        
                                                                     
                                                                 </div>}
+                                                                </div>}
+
                                                         </div>}
                                                         
                                         {category === "members" && <div>

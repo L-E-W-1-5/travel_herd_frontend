@@ -1,4 +1,4 @@
-import {useState} from 'react'
+//import {useState} from 'react'
 import {useForm} from 'react-hook-form'
 import './createTrip.css'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -7,8 +7,8 @@ import DateForm from './DateForm/DateForm'
 import GroupForm from './GroupForm/GroupForm'
 import MultipleEventForm from './MultipleEventForm/MultipleEventForm'
 import useMultistepForm from './Hooks/useMultistepForm'
-import NewForm from './AnotherFuckingForm/NewForm'
-import CategoryForm from './Another FormAgain/CategoryForm'
+// import NewForm from './AnotherFuckingForm/NewForm'
+// import CategoryForm from './Another FormAgain/CategoryForm'
 
 
 // import Navbar from '../NavBar/NavBar';
@@ -16,7 +16,7 @@ const url = 'http://localhost:3001/api'
 
 const CreateTrip = ({setTripDetails, pageSelect, reFetch}:any) => {
 
-    const [object, setObject] = useState({})
+   // const [object, setObject] = useState({})
 
     const {
         register,
@@ -58,7 +58,7 @@ async function onSubmit(data: any) {
     next()
 
     if(isLastStep){
-        const reply = await onFetch(data)
+        await onFetch(data)
         //setTripDetails(reply.payload)    // TODO: maybe use local storage to save the details of the form while logging in?
         reFetch((current:any) => !current)
         alert("your trip has been saved, go to 'view trips' to see it.")
@@ -122,7 +122,7 @@ export default CreateTrip
 
 
 
-{/* <GroupForm {...{register, errors}}/>, 
-    <DateForm {...{ control, register, errors}}/>, 
-    <MembersForm {...{ control, register, errors}}/>, 
-    <MultipleEventForm {...{ control, register, errors, getValues, setValue}}/> */}
+// {/* <GroupForm {...{register, errors}}/>, 
+//     <DateForm {...{ control, register, errors}}/>, 
+//     <MembersForm {...{ control, register, errors}}/>, 
+//     <MultipleEventForm {...{ control, register, errors, getValues, setValue}}/> */}

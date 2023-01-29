@@ -3,16 +3,16 @@ import './TripCard.css'
 const TripCard = ({trip, handlePage, setTripDetails}:any) => {
 //console.log(trip[0].trip_name)
 
-async function getTripDetails() {
+// async function getTripDetails() {
 
-    const res = await fetch(`http://localhost:3001/api/trip/${trip.trip_id}`, {
+//     const res = await fetch(`http://localhost:3001/api/trip/${trip.trip_id}`, {
 
-        headers: { "Content-Type": "application/json" },
+//         headers: { "Content-Type": "application/json" },
 
-    })
-    const data = await res.json()
+//     })
+//     const data = await res.json()
 
-}
+// }
 
 
 
