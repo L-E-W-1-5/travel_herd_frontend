@@ -263,6 +263,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                                                             })}
                                                         </select>                      
                                                         </div>
+                                                        {chosenItineraryEvent ? <div>{chosenItineraryEvent}</div> : <div>
                                                         {itineraryCatVoted && <><div className="itinerary-item">
                                                             {tripDetails.itinerary.filter((item:any) => item.id === Number(event)).map((e:any) => {
                                                                         
@@ -282,7 +283,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                                                             <p>out of {tripDetails.no_of_users} people</p>
                                                             </>}
                                                             
-                                                            {chosenItineraryEvent ? <div>{chosenItineraryEvent}</div> : <div>
+                                                            
                                                         {event && !itineraryCatVoted && <div className="itinerary-item">
                                                                     {tripDetails.itinerary.filter((item:any) => item.id === Number(event)).map((e:any) => {
                                                                         
