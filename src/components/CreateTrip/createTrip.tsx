@@ -12,7 +12,8 @@ import useMultistepForm from './Hooks/useMultistepForm'
 
 
 // import Navbar from '../NavBar/NavBar';
-const url = 'http://localhost:3001/api'
+//const url = 'http://localhost:3001/api'
+const url = "https://travel-herd-api.onrender.com"
 
 const CreateTrip = ({setTripDetails, pageSelect, reFetch}:any) => {
 

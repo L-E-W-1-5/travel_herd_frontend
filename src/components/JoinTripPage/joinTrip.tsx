@@ -4,7 +4,8 @@ import './joinTrip.css'
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-const url = "localhost:3001"
+//const url = "localhost:3001"
+const url = "https://travel-herd-api.onrender.com"
 
 const JoinTrip = (props:any) => {
 
@@ -30,7 +31,7 @@ function handleSubmit(e:any) {
 async function addTripToUserTable() {
     const ob = {tripid: tripID, 
                 tripusername: tripUsername}
-    const response = await fetch(`http://${url}/api/users/${user?.sub}`, {
+    const response = await fetch(`${url}/api/users/${user?.sub}`, {
         method: 'PATCH',
         headers:  {"content-type": "application/json"},
         body: JSON.stringify(ob)

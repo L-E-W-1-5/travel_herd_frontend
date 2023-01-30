@@ -5,7 +5,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { BarChart, Bar, CartesianGrid, XAxis, YAxis } from 'recharts'
 
 
-
+const url = "https://travel-herd-api.onrender.com"
 
 const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: current trips now has an array, votesCastByUser, that includes any id that has been voted on, for dates anyway
 //console.log(currentTrips.itineraryVotesCast)
@@ -65,7 +65,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
 
     async function saveDateVote(vote:any){  // TODO: need to check and/or add to the voted_user table to see if user has already voted before registering vote
 
-        const response = await fetch(`http://localhost:3001/api/voting/${user?.sub}`, {
+        const response = await fetch(`${url}/api/voting/${user?.sub}`, {
 
             method: 'POST',
 
@@ -94,7 +94,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
 
     async function saveItineraryVote(item:any) {
         console.log(item)
-        const response = await fetch(`http://localhost:3001/api/voting/${user?.sub}`, {
+        const response = await fetch(`${url}/api/voting/${user?.sub}`, {
 
             method: 'POST',
 
