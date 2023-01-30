@@ -96,7 +96,8 @@
 
 .itinerary-dropdown {
     position: relative;
-    margin-bottom: 60%;
+
+    bottom:120px;
    
 }
 
@@ -130,6 +131,27 @@
     align-items: flex-start;
     flex-direction: column;
 }
+
+
+
+
+.details-page-input-field {
+    height: 3vh;
+    color: var(--green);
+    font-size: 16px;
+    font-weight: bold;
+    /* position: relative; */
+    /* top: 60px; */
+    border: 2px inset var(--beige);
+    -ms-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--beige);
+    padding-left: 12px;
+    border-radius: 5px;
+    width: 20vw !important;
+           }
 
 
 

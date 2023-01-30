@@ -196,6 +196,10 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
 
                 <div className="info-box">
 
+                    {!category && <div>
+                                    <p>select a category from the left to view details about your trip.</p>
+                                </div>}
+
                     {category === "destination" && <div className="destination-info">
                                                         <p className='destination-p'>your group is going to....</p>
                                                         <h1>{tripDetails.destination}</h1>
@@ -256,7 +260,7 @@ const TripDetails = ({pageSelect, tripDetails, currentTrips}:any) => { //TODO: c
                             {category === "itinerary" && <div className="itinerary-voting-container">
 
                                                         <div className="itinerary-dropdown">
-                                                        <select onChange={itineraryChange}>
+                                                        <select className="details-page-input-field" onChange={itineraryChange}>
                                                             <option>-select-</option>
                                                             {tripDetails.itinerary.map((item:any) => {
                                                                 return <option value={item.id}>itinerary id #{item.id}</option>

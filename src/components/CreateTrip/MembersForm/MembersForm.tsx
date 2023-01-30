@@ -8,9 +8,9 @@ export default function MembersForm({ control, register}:any) {
     name: "member"
   });
 
-
+ //TODO: add scrolling functionality without messing up the css on the labels
   return (
-    <div>
+    <div > 
       
       
         {fields.map((item, index) => {
@@ -35,7 +35,7 @@ export default function MembersForm({ control, register}:any) {
               </label>
               
 
-              <button type="button" onClick={() => remove(index)}>
+              <button className="button page-alignment thin-button" type="button" onClick={() => remove(index)}>
                 delete
               </button>
           
@@ -44,7 +44,7 @@ export default function MembersForm({ control, register}:any) {
         })}
       
 
-        <button className="page-alignment"
+        <button className="button page-alignment thin-button"
           type="button"
           onClick={() => {
             append(null);

@@ -36,6 +36,7 @@ const CreateTrip = ({setTripDetails, pageSelect, reFetch}:any) => {
         isLastStep,
         back,
         next,
+        goTo,
         setCurrentStepIndex
     } = useMultistepForm([ 
        
@@ -66,8 +67,18 @@ async function onSubmit(data: any) {
         pageSelect("dashboard")
         reset()
         setCurrentStepIndex(0)
-    }
-  
+    }  
+}
+
+function onCancel() {
+    
+    if (window.confirm("are you sure you want ot cancel this trip?")) {
+        pageSelect("dashboard");
+        goTo(0);
+        reset();
+    } else {
+        return
+    } 
     
 }
 
@@ -113,7 +124,7 @@ async function onFetch(data:any) {
      
         </div>
 
-    <button className="create-cancel-button cancel-button" onClick={() => {pageSelect("dashboard")}}>cancel</button>
+    <button className="create-cancel-button cancel-button" onClick={onCancel}>cancel</button>
 
     </div>
     </>)

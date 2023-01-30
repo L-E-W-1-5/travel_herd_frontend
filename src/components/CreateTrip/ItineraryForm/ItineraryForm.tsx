@@ -28,18 +28,21 @@ export default function ItineraryForm({ control, register, nestIndex}:any) {
                 <option value="Concert">concert</option>
               </select>
 
-              <input id="itinerary-page-item" className="form-page-input-field" 
+              <label className="form-page-label"> 
+              <input id="itinerary-page-item" placeholder="&nbsp;" className="form-page-input-field" 
                 name={`event[${nestIndex}].itinerary[${k}].name`}            
                 {...register(`event[${nestIndex}].itinerary[${k}].name`)}
               />
-              
-              <input id="itinerary-page-item" className="form-page-input-field" 
+              <span className="placeholder">event name</span>  
+              </label>
+
+              <input id="itinerary-page-item" className="form-page-input-field date-height" 
                 type="datetime-local"
                 name={`event[${nestIndex}].itinerary[${k}].date_time`}            
                 {...register(`event[${nestIndex}].itinerary[${k}].date_time`)}
               />
 
-              <button type="button" onClick={() => remove(k)}>
+              <button className="button page-alignment thin-button" type="button" onClick={() => remove(k)}>
                 delete
               </button>
 
@@ -48,7 +51,7 @@ export default function ItineraryForm({ control, register, nestIndex}:any) {
         })}
       
 
-        <button className="button page-alignment itinerary-button"
+        <button className="button page-alignment thin-button"
           type="button"
           onClick={() => {
             append(null);

@@ -28,7 +28,7 @@ export default function MultipleEventForm({ control, register, errors, setValue,
                 />
   </div>
                 
-                <button className="delete-current-event-button"
+                <button className="button page-alignment thin-button"
                   type="button" onClick={() => remove(index)}>
                     delete event
                   </button>
@@ -39,7 +39,7 @@ export default function MultipleEventForm({ control, register, errors, setValue,
         })}
 
 
-        <button style={{width: '150px', marginLeft: '45%', marginTop: '1%'}}
+        <button className="button page-alignment thin-button add-event-button" 
           type="button"
           onClick={() => {
             append(null);

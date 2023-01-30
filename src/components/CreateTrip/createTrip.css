@@ -78,10 +78,10 @@
 .form-page-label .placeholder{
     position: absolute;
     left: 0.25vw;
-    top: -1vh;
+    top: -0.5vh;
     font-weight: bold;
     transition: top 0.3s ease, font-size 0.3s ease;
-    padding: 5%;
+    padding: 1%;
     }
 
 .form-page-input-field {
@@ -89,14 +89,14 @@
     color: var(--green);
     font-size: 16px;
     font-weight: bold;
-    margin: 8px;
+    margin: 2px;
     border: 2px inset var(--beige);
     -ms-appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
     background: var(--beige);
-    padding: 12px;
+    padding-left: 12px;
     border-radius: 5px;
     width: 30vw !important;
            }
@@ -104,7 +104,7 @@
 
 .form-page-label input:not(:placeholder-shown) + .placeholder,
 .form-page-label input:focus +.placeholder{
-    top: -70%;
+    top: -90%;
     font-size: 12px;
 }
 
@@ -143,6 +143,7 @@
     width: 30vw;
     flex-wrap: wrap;
     color: var(--green);
+    padding-top: 20px;
 } 
 
 
@@ -150,11 +151,12 @@
     flex-wrap: wrap;
     height: 5vh;
     gap:1px;
+    padding-top: 20px;
 }
 
 
 #itinerary-page-item {
-    width: 20vw;
+    width: 21vw !important;
 }
 
 .page-alignment {
@@ -164,7 +166,8 @@
 
 .scroll-page {
     overflow-y: scroll;
-    height: 350px;
+    height: 330px;
+    overflow-x: hidden;
 }
 
 .itinerary-button {
@@ -172,3 +175,23 @@
     min-width: 100px;
     margin-left: 4%;
 }
+
+.thin-button {
+    min-height: 25px;
+    min-width: 100px;
+   max-height: 25px;
+   margin-left: 4%;
+}
+
+.add-event-button {
+    margin-left: 46.7%;
+    margin-bottom: 1%;;
+}
+.date-height {
+   
+    margin:0px;
+}
+
+
+
+/* style={{width: '150px', marginLeft: '45%', marginTop: '1%'}} */

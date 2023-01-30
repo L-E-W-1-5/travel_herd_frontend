@@ -14,8 +14,7 @@ const ViewTrips = ({setTripDetails, pageSelect, currentTrips}:any) => {
     function scrollWinRight() {
         console.log(((count / 2) * 290) - 980)
         if(scroll < ((count / 2) * 290)- 1350){
-        //setScroll(scroll + 580)
-       // console.log(scroll)
+
         myRef.current?.scrollTo({
             left: scroll + 580,
             behavior: 'smooth'
