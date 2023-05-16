@@ -7,8 +7,7 @@ import DateForm from './DateForm/DateForm'
 import GroupForm from './GroupForm/GroupForm'
 import MultipleEventForm from './MultipleEventForm/MultipleEventForm'
 import useMultistepForm from './Hooks/useMultistepForm'
-// import NewForm from './AnotherFuckingForm/NewForm'
-// import CategoryForm from './Another FormAgain/CategoryForm'
+
 
 
 // import Navbar from '../NavBar/NavBar';
