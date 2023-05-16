@@ -12,8 +12,8 @@ import useMultistepForm from './Hooks/useMultistepForm'
 
 
 // import Navbar from '../NavBar/NavBar';
-//const url = 'http://localhost:3001/api'
-const url = "https://travel-herd-api.onrender.com/api"
+//const url = 'http://localhost:3001'
+const url = "https://travel-herd-api.onrender.com"
 
 const CreateTrip = ({setTripDetails, pageSelect, reFetch}:any) => {
 
@@ -83,7 +83,7 @@ function onCancel() {
 }
 
 async function onFetch(data:any) {
-    const res = await fetch(`${url}/object`, {
+    const res = await fetch(`${url}/api/object`, {
         method: 'POST',
 
         headers: { "Content-Type": "application/json"},
