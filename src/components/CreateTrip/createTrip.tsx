@@ -53,8 +53,8 @@ const CreateTrip = ({setTripDetails, pageSelect, reFetch}:any) => {
 
 async function onSubmit(data: any) {
     if(user?.sub){
-    data.admin_id = user?.sub  // TODO: Create a fetch request to retrieve the trip ID and save the trip to a database.
-                            // TODO: Create a function that changes state in the dashboard component to 'data'.
+    data.admin_id = user?.sub  
+                           
     }
     console.log(data)
     next()

@@ -16,7 +16,7 @@ const { user } = useAuth0();
 function handleSubmit(e:any) {
      e.preventDefault();
      console.log(tripUsername)
-    console.log(tripID)         // TODO: // post request here to add trip to a user
+    console.log(tripID)         
 
 // reFetch((current:any) => !current)
     addTripToUserTable();

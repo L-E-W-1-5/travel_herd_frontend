@@ -17,8 +17,9 @@ import { ImBinoculars } from "react-icons/im";
 //import userEvent from "@testing-library/user-event"
 
 const domain = "dev-otxf3y3m35xq561z.uk.auth0.com"
-//const url = "localhost:3001"
+//const url = "http://localhost:3001"
 const url = "https://travel-herd-api.onrender.com"
+
 
 const Dashboard = () => {
 
@@ -34,7 +35,7 @@ const Dashboard = () => {
 
 useEffect(() => {
 
-console.log("here?")
+
   const getUserToken = async () => {
 
   const accessToken = await getAccessTokenSilently({
@@ -42,7 +43,10 @@ console.log("here?")
       audience: `https://${domain}/api/v2/`,
   
     }); 
-    console.log(accessToken)
+    // console.log(accessToken)
+    // console.log(user?.sub)
+
+   
 
     const response = await fetch(`${url}/api/users/${user?.sub}`,
       {
